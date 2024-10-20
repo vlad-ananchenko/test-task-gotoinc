@@ -14,6 +14,7 @@ const configureWebpack = (options: SetupOptions): Configuration => {
     mode,
     entry: paths.entry,
     output: {
+      publicPath: '/',
       path: paths.output,
       filename: '[name].[contenthash].js',
       clean: true
