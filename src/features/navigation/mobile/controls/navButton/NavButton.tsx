@@ -1,10 +1,10 @@
 import { ButtonBase } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 
-import { NavItem } from '@/types/NavItem';
+import { NavigationItem } from '@/features/navigation/navigationMap';
 import * as styles from './navButton.module.scss';
 
-interface NavButtonProps extends Required<NavItem> {
+interface NavButtonProps extends Omit<NavigationItem, 'isPrivate'> {
   onClose: () => void;
 }
 

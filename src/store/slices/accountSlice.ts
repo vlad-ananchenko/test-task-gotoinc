@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Role, Roles } from '@/types/Role';
-import { ensureUserId } from '../utils';
+import { ROLES } from '@/lib/constants';
+import { Role } from '@/types/Role';
+import { ensureUserId } from '../utils/ensureUserId';
+import { PersistedRootState } from '..';
 
 interface AccountState {
   userId: string;
@@ -10,18 +12,22 @@ interface AccountState {
 
 const initialState: AccountState = {
   userId: ensureUserId(),
-  role: Roles.GUEST
+  role: ROLES.USER
 };
 
 const accountSlice = createSlice({
   name: 'account',
   initialState,
   reducers: {
-    setRole: (state, action: PayloadAction<Role>) => {
-      state.role = action.payload;
+    setUserId: (state, action: PayloadAction<string>) => {
+      state.userId = action.payload;
     }
   }
 });
 
-export const { setRole } = accountSlice.actions;
+export const { setUserId } = accountSlice.actions;
+
+export const selectUserId = (state: PersistedRootState) => state.account.userId;
+export const selectUserRole = (state: PersistedRootState) => state.account.role;
+
 export default accountSlice.reducer;

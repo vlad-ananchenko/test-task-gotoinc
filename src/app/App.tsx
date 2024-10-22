@@ -1,14 +1,16 @@
 import { RouterProvider } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
-import { appRoutes } from '@/router/appRoutes';
 import { theme } from '@/styles/theme';
+import { useAppRouter } from '@/router/useAppRouter';
 
 export const App = () => {
+  const router = useAppRouter();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <RouterProvider router={appRoutes} />
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 };

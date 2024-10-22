@@ -1,12 +1,12 @@
+import { NavigationItem } from '../../navigationMap';
 import { NavButton } from '../controls/navButton/NavButton';
-import { NavItem } from '@/types/NavItem';
 
 interface NavButtonsProps {
-  navItems: NavItem[];
+  navItems: NavigationItem[];
   onClose: () => void;
 }
 
 export const NavButtons = ({ navItems, onClose }: NavButtonsProps) =>
-  navItems.map(({ key, label, path, onClick }) => (
-    <NavButton key={key} label={label} path={path} onClick={onClick && onClick} onClose={onClose} />
+  navItems.map(({ label, path, onClick }) => (
+    <NavButton key={label} label={label} path={path} onClick={onClick && onClick} onClose={onClose} />
   ));

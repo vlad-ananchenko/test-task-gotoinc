@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { NavItem } from '@/types/NavItem';
+import { NavigationItem } from '@/features/navigation/navigationMap';
 import * as styles from './navLink.module.scss';
 
-export const NavLink = ({ path, label }: NavItem) => {
+export const NavLink = ({ path, label }: Pick<NavigationItem, 'path' | 'label'>) => {
   const { pathname } = useLocation();
 
   const isActive = pathname === path;

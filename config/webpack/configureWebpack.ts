@@ -25,7 +25,12 @@ const configureWebpack = (options: SetupOptions): Configuration => {
     },
     resolve: setupResolvers(options),
     devtool: devMode ? 'source-map' : false,
-    devServer: devMode && setupDevServer(options)
+    devServer: devMode && setupDevServer(options),
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
+    }
   };
 };
 

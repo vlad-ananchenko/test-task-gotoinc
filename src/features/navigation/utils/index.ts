@@ -1,2 +1,2 @@
-export * from './getNavigationKey';
-export * from './getNavigationItems';
+export * from './getDeviceKey';
+export * from './generateNavigationItems';

@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
 
 import { NavLinks } from '../lists/NavLinks';
-import { NavItem } from '@/types/NavItem';
+import { NavigationItem } from '../../navigationMap';
 import * as styles from './bar.module.scss';
 
 interface BarProps {
-  navItems: NavItem[];
+  navItems: NavigationItem[];
 }
 
 export const Bar = ({ navItems }: BarProps) => (

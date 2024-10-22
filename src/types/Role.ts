@@ -1,7 +1,3 @@
-export const Roles = {
-  GUEST: 'guest',
-  USER: 'user',
-  ADMIN: 'admin'
-} as const;
+import { ROLES } from '@/lib/constants';
 
-export type Role = (typeof Roles)[keyof typeof Roles];
+export type Role = (typeof ROLES)[keyof typeof ROLES];

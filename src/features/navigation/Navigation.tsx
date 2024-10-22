@@ -1,17 +1,17 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { AppBar, Toolbar, useMediaQuery, Theme } from '@mui/material';
 
 import { Drawer } from './mobile/drawer/Drawer';
 import { Bar } from './desktop/bar/Bar';
 import { LogoButton } from './desktop/controls/logoButton/LogoButton';
 import { BurgerButton } from './mobile/controls/burgerButton/BurgerButton';
-import { getNavigationItems, getNavigationKey } from './utils';
-import { Role } from '@/types/Role';
-import { NavItem } from '@/types/NavItem';
+import { getDeviceKey } from './utils';
+import { useNavigation } from './useNavigation';
+import { NavigationItem } from './navigationMap';
 
 const NavigationComponents = {
-  desktop: (navItems: NavItem[]) => <Bar navItems={navItems} />,
-  mobile: (navItems: NavItem[], isOpen: boolean, onClose: () => void) => (
+  desktop: (navItems: NavigationItem[]) => <Bar navItems={navItems} />,
+  mobile: (navItems: NavigationItem[], isOpen: boolean, onClose: () => void) => (
     <Drawer navItems={navItems} isOpen={isOpen} onClose={onClose} />
   )
 };
@@ -21,21 +21,17 @@ const NavigationButtons = {
   mobile: (toggleDrawer: () => void) => <BurgerButton onClick={toggleDrawer} />
 };
 
-interface NavigationProps {
-  role?: Role;
-}
-
-export const Navigation = ({ role = 'user' }: NavigationProps) => {
+export const Navigation = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
-  const navItems = useMemo(() => getNavigationItems(role), [role]);
+  const { navItems } = useNavigation();
 
   const toggleDrawer = useCallback(() => setIsDrawerOpen(!isDrawerOpen), [isDrawerOpen]);
 
-  const navigationKey = getNavigationKey(isDesktop);
+  const deviceKey = getDeviceKey(isDesktop);
 
-  const NavigationButton = NavigationButtons[navigationKey](toggleDrawer);
-  const NavigationComponent = NavigationComponents[navigationKey](navItems, isDrawerOpen, toggleDrawer);
+  const NavigationButton = NavigationButtons[deviceKey](toggleDrawer);
+  const NavigationComponent = NavigationComponents[deviceKey](navItems, isDrawerOpen, toggleDrawer);
 
   return (
     <AppBar position="static">

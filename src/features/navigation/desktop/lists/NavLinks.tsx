@@ -1,9 +1,9 @@
 import { NavLink } from '../controls/navLink/NavLink';
-import { NavItem } from '@/types/NavItem';
+import { NavigationItem } from '../../navigationMap';
 
 interface NavLinksProps {
-  navItems: NavItem[];
+  navItems: NavigationItem[];
 }
 
 export const NavLinks = ({ navItems }: NavLinksProps) =>
-  navItems.map(({ key, path, label }) => <NavLink key={key} path={path} label={label} />);
+  navItems.map(({ path, label }) => <NavLink key={label} path={path} label={label} />);
