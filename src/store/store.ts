@@ -10,7 +10,8 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 const persistConfig = {
   key: 'state',
-  storage
+  storage,
+  whitelist: ['account', 'orderRequests', 'deliveryRequests']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

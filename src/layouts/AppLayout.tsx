@@ -11,7 +11,7 @@ export const AppLayout = () => {
   return (
     <Box className={styles.root}>
       <Navigation />
-      <Container maxWidth="lg" className={styles.container}>
+      <Container maxWidth="xl" className={styles.container}>
         <Outlet />
       </Container>
     </Box>
