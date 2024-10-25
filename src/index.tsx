@@ -1,14 +1,25 @@
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { router } from './router';
+import { store, persistor } from '@/store';
+import { App } from '@/app/App';
 
-const root = document.getElementById('root');
+const rootElement = document.getElementById('root');
 
-if (!root) {
-  throw new Error('root not found');
+if (!rootElement) {
+  throw new Error('Root element not found');
 }
 
-const container = createRoot(root);
+const root = createRoot(rootElement);
 
-container.render(<RouterProvider router={router} />);
+root.render(
+  <StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </StrictMode>
+);

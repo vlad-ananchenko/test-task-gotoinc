@@ -14,6 +14,7 @@ const configureWebpack = (options: SetupOptions): Configuration => {
     mode,
     entry: paths.entry,
     output: {
+      publicPath: '/',
       path: paths.output,
       filename: '[name].[contenthash].js',
       clean: true
@@ -24,7 +25,12 @@ const configureWebpack = (options: SetupOptions): Configuration => {
     },
     resolve: setupResolvers(options),
     devtool: devMode ? 'source-map' : false,
-    devServer: devMode && setupDevServer(options)
+    devServer: devMode && setupDevServer(options),
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
+    }
   };
 };
 
